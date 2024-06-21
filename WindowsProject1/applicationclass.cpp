@@ -19,7 +19,7 @@ bool ApplicationClass::Init(int screenWidth, int screenHeight, HWND hwnd){
 	// Create and initialize the Direct3D object.
 	m_Direct3D = new D3DClass;
 
-	result = m_Direct3D->Initialize(screenWidth, screenHeight, VSYNC_ENABLED, hwnd, FULL_SCREEN, SCREEN_DEPTH, SCREEN_NEAR);
+	result = m_Direct3D->Init(screenWidth, screenHeight, VSYNC_ENABLED, hwnd, FULL_SCREEN, SCREEN_DEPTH, SCREEN_NEAR);
 	if (!result)
 	{
 		MessageBox(hwnd, L"Could not initialize Direct3D", L"Error", MB_OK);
@@ -48,7 +48,7 @@ bool ApplicationClass::Frame(){
 
 bool ApplicationClass::Render(){
 	//Clear buffers to begin scene
-	m_Direct3D->BeginScene(0.0f, 1.0f, 1.0f, 1.0f);
+	m_Direct3D->BeginScene(1.0f, 1.0f, 0.0f, 1.0f);
 
 	//Present rendered scene to screen
 	m_Direct3D->EndScene();
