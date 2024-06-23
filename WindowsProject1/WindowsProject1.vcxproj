@@ -130,15 +130,21 @@
   <ItemGroup>
     <ClCompile Include="applicationclass.cpp" />
     <ClCompile Include="applicationclass.h" />
+    <ClCompile Include="colorshaderclass.cpp" />
     <ClCompile Include="d3dclass.cpp" />
     <ClCompile Include="inputclass.cpp" />
     <ClCompile Include="systemclass.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="colorshaderclass.h" />
     <ClInclude Include="d3dclass.h" />
     <ClInclude Include="inputclass.h" />
     <ClInclude Include="systemclass.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="color.ps.hlsl" />
+    <None Include="color.vs.hlsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
