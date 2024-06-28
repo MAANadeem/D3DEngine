@@ -62,13 +62,18 @@ void ApplicationClass::Shutdown(){
 }
 
 bool ApplicationClass::Frame(){
+	static float spin = 0.0f;
 	bool result;
-	result = Render();
+
+	spin -= 0.0174532925f * 0.25f;
+	if (spin < 0.0f) spin += 360.0f;
+	
+	result = Render(spin);
 
 	return result;
 }
 
-bool ApplicationClass::Render(){
+bool ApplicationClass::Render(float rotation){
 	XMMATRIX world, view, proj;
 	bool result;
 
@@ -82,11 +87,13 @@ bool ApplicationClass::Render(){
 	m_Camera->GetViewMatrix(view);
 	m_Direct3D->GetProjectionMatrix(proj);
 
+	//rotate world matrix with rotation value
+	//world = XMMatrixRotationY(rotation);
+
 	//put model vertex and index buffers on graphics pipeline
 	m_Model->Render(m_Direct3D->GetDeviceContext());
 
 	//Render model with color shader
-
 	result = m_ColorShader->Render(m_Direct3D->GetDeviceContext(), m_Model->GetIndexCount(), world, view, proj);
 	if (!result) return false;
 

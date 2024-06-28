@@ -22,10 +22,11 @@ bool ModelClass::InitBuffers(ID3D11Device* device) {
 	HRESULT result;
 
 	//create two arrays to hold data
-	m_vertexCount = 3;
-	m_indexCount = 3;
+	m_vertexCount = 4;
+	m_indexCount = 4;
 	vertices = new VertexType[m_vertexCount];
 	indices = new unsigned long[m_indexCount];
+
 
 	// Load the vertex array with data.
 	vertices[0].position = XMFLOAT3(-1.0f, -1.0f, 0.0f);  // Bottom left.
@@ -36,11 +37,15 @@ bool ModelClass::InitBuffers(ID3D11Device* device) {
 
 	vertices[2].position = XMFLOAT3(1.0f, -1.0f, 0.0f);  // Bottom right.
 	vertices[2].color = XMFLOAT4(0.0f, 0.0f, 1.0f, 1.0f);
+	
+	vertices[3].position = XMFLOAT3(0.0f, -1.0f, 1.0f);  // Bottom right.
+	vertices[3].color = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
 
 	// Load the index array with data.
 	indices[0] = 0;  // Bottom left.
 	indices[1] = 1;  // Top middle.
 	indices[2] = 2;  // Bottom right.
+	indices[3] = 3;
 
 	// Set up the description of the static vertex buffer.
 	vertexBufferDesc.Usage = D3D11_USAGE_DEFAULT;
@@ -101,6 +106,6 @@ void ModelClass::RenderBuffers(ID3D11DeviceContext* context) {
 	context->IASetIndexBuffer(m_indexBuffer, DXGI_FORMAT_R32_UINT, offset);
 
 	//set the type of primitive to be rendered from this vertex buffer
-	context->IASetPrimitiveTopology(D3D10_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+	context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
 }
 
